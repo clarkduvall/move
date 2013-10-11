@@ -24,7 +24,7 @@ $(function() {
   ///////////////
   // Fireworks //
   ///////////////
-  function firework(width, height) {
+  function firework() {
     var x = _.random(width), y = _.random(height);
     return new Move.System({
       numParticles: 40,
@@ -94,7 +94,7 @@ $(function() {
   $('<h2>Worms</h2>').appendTo('body');
   var controller2 = new Move.Controller({
         context: createCanvasAndGetCtx('black', width, height),
-        speed: 5
+        speed: 2
       });
 
   controller2.addSystem(new Move.System({
@@ -134,4 +134,48 @@ $(function() {
   }));
 
   createPausePlay(controller2);
+
+  //////////
+  // Bugs //
+  //////////
+  function bugs() {
+    var x = _.random(width), y = _.random(height);
+    return new Move.System({
+      numParticles: 400,
+      rules: [
+        Move.Rules.magnet(.01),
+        Move.Rules.wallX(width + 1),
+        Move.Rules.wallX(-1),
+        Move.Rules.wallY(height + 1),
+        Move.Rules.wallY(-1)
+      ],
+      newParticle: function(num) {
+        var angle = _.random(0, 628) / 100,
+            strength = _.random(10000) / 1000;
+        return new Move.Particle({
+          x: x,
+          y: y,
+          dx: Math.cos(angle) * strength,
+          dy: Math.sin(angle) * strength,
+          origX: _.random(width),
+          origY: _.random(height),
+          size: 2,
+          trail: 0,
+          r: 0, g: 0, b: 0
+        });
+      }
+    });
+  }
+  $('<h2>Bugs</h2>').appendTo('body');
+  var controller3 = new Move.Controller({
+        context: createCanvasAndGetCtx('', width, height),
+        speed: 5
+      });
+
+  for (var i = 0; i < 5; i++) {
+    controller3.addSystem(bugs());
+  }
+
+
+  createPausePlay(controller3);
 });
