@@ -46,10 +46,11 @@ $(function() {
         var angle = _.random(0, 628) / 100,
             strength = _.random(30);
         return new Move.Particle({
-          x: x,
-          y: y,
-          dx: Math.cos(angle) * strength,
-          dy: Math.sin(angle) * strength,
+          pos: new Move.Vector({x: x, y: y}),
+          vel: new Move.Vector({
+            x: Math.cos(angle) * strength,
+            y: Math.sin(angle) * strength
+          }),
           r: _.random(255),
           b: _.random(255),
           g: _.random(255),
@@ -114,12 +115,15 @@ $(function() {
       var angle = _.random(0, 628) / 100,
           strength = _.random(10);
       return new Move.Particle({
-        y: 100,
-        x: 400,
-        dx: Math.cos(angle) * strength,
-        dy: Math.sin(angle) * strength,
-        origX: _.random(width),
-        origY: _.random(height),
+        pos: new Move.Vector({x: 400, y: 100}),
+        vel: new Move.Vector({
+          x: Math.cos(angle) * strength,
+          y: Math.sin(angle) * strength
+        }),
+        origPos: new Move.Vector({
+          x: _.random(width),
+          y: _.random(height)
+        }),
         size: 2,
         trail: 100,
         draw: function(ctx, opacity, pos) {
@@ -153,12 +157,15 @@ $(function() {
         var angle = _.random(0, 628) / 100,
             strength = _.random(10000) / 1000;
         return new Move.Particle({
-          x: x,
-          y: y,
-          dx: Math.cos(angle) * strength,
-          dy: Math.sin(angle) * strength,
-          origX: _.random(width),
-          origY: _.random(height),
+          pos: new Move.Vector({x: x, y: y}),
+          vel: new Move.Vector({
+            x: Math.cos(angle) * strength,
+            y: Math.sin(angle) * strength
+          }),
+          origPos: new Move.Vector({
+            x: _.random(width),
+            y: _.random(height)
+          }),
           size: 2,
           trail: 0,
           r: 0, g: 0, b: 0
