@@ -13,31 +13,38 @@
   ////////////
   function Vector(options) {
     options || (options = {});
+    _.defaults(options, {x: 0, y: 0, z: 0});
     this.x = options.x;
     this.y = options.y;
+    this.z = options.z;
   }
 
   Vector.prototype.add = function(other) {
     this.x += other.x;
     this.y += other.y;
+    this.z += other.z;
     return this;
   };
 
   Vector.prototype.sub = function(other) {
     this.x -= other.x;
     this.y -= other.y;
+    this.z -= other.z;
     return this;
   };
 
-  Vector.prototype.mult = function(scalar) {
+  Vector.prototype.multiplyScalar = function(scalar) {
     this.x *= scalar;
     this.y *= scalar;
+    this.z *= scalar;
     return this;
   };
 
   Vector.prototype.length = function() {
-    return Math.sqrt(this.x * this.x + this.y + this.y);
+    return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
   };
+
+  Move.Vector = Vector;
 
   ////////////////
   // Controller //
@@ -49,6 +56,7 @@
     _.defaults(options, {
       trace: false,
       speed: 1,
+      draw: Controller.prototype.draw,
       preDraw: function(ctx) {},
       postDraw: function(ctx) {},
       setContext: function(ctx) {},
@@ -56,12 +64,12 @@
 
     this.systems = [];
 
-    if (!options.context) {
-      throw "Move.Controller requires a context."
+    if (!options.context && !options.draw) {
+      throw "Move.Controller requires a 2D context or custom draw function."
     }
 
-    _.each(['trace', 'context', 'preDraw', 'postDraw', 'setContext', 'speed'],
-           function(name) {
+    _.each(['trace', 'context', 'preDraw', 'postDraw', 'draw', 'setContext',
+            'speed'], function(name) {
       that[name] = options[name];
     });
 
@@ -105,7 +113,7 @@
     // Must have switched tabs.
     if (delta < .1) {
       this.update(delta * this.speed);
-      this.draw();
+      this.draw(this.context);
     }
 
     if (!this.paused) {
@@ -118,32 +126,30 @@
         this.context.canvas.height);
   }
 
-  Controller.prototype.draw = function() {
-    var that = this;
-
-    this.context.save();
+  Controller.prototype.draw = function(ctx) {
+    ctx.save();
 
     if (!this.trace) {
       this.clear();
     }
 
-    this.setContext(this.context);
+    this.setContext(ctx);
 
-    this.context.save();
-    this.preDraw(this.context);
-    this.context.restore();
+    ctx.save();
+    this.preDraw(ctx);
+    ctx.restore();
 
     _.each(this.systems, function(system) {
-      that.context.save();
-      system.draw(that.context);
-      that.context.restore();
+      ctx.save();
+      system.draw(ctx);
+      ctx.restore();
     });
 
-    this.context.save();
-    this.postDraw(this.context);
-    this.context.restore();
+    ctx.save();
+    this.postDraw(ctx);
+    ctx.restore();
 
-    this.context.restore();
+    ctx.restore();
   }
 
   Move.Controller = Controller;
@@ -159,7 +165,7 @@
       newParticle: function() {
         return new Particle();
       },
-      numParticles: 10,
+      numParticles: 0,
       rules: [],
       preDraw: function(ctx) {},
       postDraw: function(ctx) {},
@@ -239,8 +245,8 @@
     options || (options = {});
 
     this.defaults = {
-      x: 0, y: 0,
-      dx: 0, dy: 0,
+      pos: new Vector(),
+      vel: new Vector(),
       r: 255, g: 0, b: 0, a: 1,
       size: 2,
       trail: false,
@@ -259,16 +265,13 @@
 
     _.defaults(options, this.defaults);
 
-    this.pos = new Vector({x: options.x, y: options.y});
-    this.origPos = new Vector({
-      x: options.origX || options.x,
-      y: options.origY || options.y
-    });
-    this.vel = new Vector({x: options.dx, y: options.dy});
+    if (!options.origPos) {
+      options.origPos = new Vector(options.pos);
+    }
     this.prevPos = [];
 
     _.each(['draw', 'isDead', 'trail', 'r', 'g', 'b', 'a', 'size', 'preUpdate',
-        'postUpdate'], function(name) {
+        'postUpdate', 'pos', 'vel', 'origPos'], function(name) {
       that[name] = options[name];
     });
 
@@ -296,7 +299,7 @@
       }
       this.prevPos.push(new Vector(this.pos));
     }
-    this.pos.add(temp.mult(delta));
+    this.pos.add(temp.multiplyScalar(delta));
 
     this.postUpdate(delta);
 
@@ -308,7 +311,7 @@
   ///////////
   // Rules //
   ///////////
-  var Rules = {
+  Move.Rules = {
     gravity: function(strength) {
       return function(particle, i, delta) {
         particle.vel.y += strength * delta;
@@ -316,14 +319,14 @@
     },
     resistance: function(strength) {
       return function(particle, i, delta) {
-        particle.vel.mult(1 - strength * delta);
+        particle.vel.multiplyScalar(1 - strength * delta);
       }
     },
     magnet: function(strength) {
       return function(particle, i, delta) {
         var temp = new Vector(particle.pos);
         temp.sub(particle.origPos);
-        particle.vel.sub(temp.mult(delta * strength));
+        particle.vel.sub(temp.multiplyScalar(delta * strength));
       }
     },
     wallX: function(x) {
@@ -343,9 +346,16 @@
           particle.vel.y = -particle.vel.y;
         }
       }
+    },
+    wallZ: function(z) {
+      return function(particle, i, delta) {
+        if ((particle.pos.z > z) !=
+            (particle.pos.z + delta * particle.vel.z > z)) {
+          particle.pos.z = z;
+          particle.vel.z = -particle.vel.z;
+        }
+      }
     }
   };
-
-  Move.Rules = Rules;
 
 }).call(this);
