@@ -54,7 +54,7 @@ $(function() {
     var camera = new THREE.PerspectiveCamera(55, width / height, 2, 2000),
         scene = new THREE.Scene(),
         geometry = new THREE.Geometry(),
-        sprite = THREE.ImageUtils.loadTexture('../img/ball.png'),
+        sprite = THREE.ImageUtils.loadTexture('img/ball.png'),
         material,
         particles,
         cubeSize = 500,
