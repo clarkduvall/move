@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-.black {
-  background: black;
-}
-</style>
+  <link rel="stylesheet" href="css/codemirror.css">
+  <link rel="stylesheet" href="css/solarized.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/codemirror-min.js"></script>
 </head>
 <body>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <select id="select"></select>
+  <canvas class="black" width="0" height="0" id="canvas"></canvas>
   <script type="text/javascript" src="js/underscore-min.js"></script>
   <script type="text/javascript" src="js/move.js"></script>
-  <script type="text/javascript" src="js/demo.js"></script>
-
-  <script type="text/javascript" src="js/three.min.js"></script>
-  <script type="text/javascript" src="js/demo3d.js"></script>
+  <script>
+    // Hack to make sure multiple controllers aren't acting on the same context.
+    var oldStart = Move.Controller.prototype.start;
+    Move.Controller.prototype.start = function() {
+      if (this.context) {
+        if (this.context.moveCtrl) {
+          this.context.moveCtrl.pause();
+          delete this.context.moveCtrl;
+        }
+        this.context.moveCtrl = this;
+      }
+      oldStart.call(this);
+    };
+  </script>
+  <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
