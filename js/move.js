@@ -139,19 +139,13 @@
 
     this.setContext(ctx);
 
-    ctx.save();
     this.preDraw(ctx);
-    ctx.restore();
 
     _.each(this.systems, function(system) {
-      ctx.save();
       system.draw(ctx);
-      ctx.restore();
     });
 
-    ctx.save();
     this.postDraw(ctx);
-    ctx.restore();
 
     ctx.restore();
   };
@@ -206,19 +200,13 @@
   System.prototype.draw = function(ctx) {
     this.setContext(ctx);
 
-    ctx.save();
     this.preDraw(ctx);
-    ctx.restore();
 
     _.each(this.particles, function(particle, i) {
-      ctx.save();
       particle.drawAll(ctx);
-      ctx.restore();
     });
 
-    ctx.save();
     this.postDraw(ctx);
-    ctx.restore();
   };
 
   System.prototype.update = function(delta) {

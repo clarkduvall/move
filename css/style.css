@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+}
+
+canvas {
+  background: black;
+  float: right;
+  width: 49%;
+}
+
+select {
+  position: absolute;
+  top: 0;
+  right: 51%;
+  z-index: 1000
+}
+
+.CodeMirror {
+  width: 49%;
+  height: 700px;
+  font-size: 12px;
+}
