@@ -41,7 +41,11 @@
   };
 
   Vector.prototype.length = function() {
-    return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+    return Math.sqrt(this.lengthSq());
+  };
+
+  Vector.prototype.lengthSq = function() {
+    return this.x * this.x + this.y * this.y + this.z * this.z;
   };
 
   Move.Vector = Vector;
@@ -80,18 +84,18 @@
     _.each(this.systems, function(system) {
       system.update(delta);
     });
-  }
+  };
 
   Controller.prototype.reset = function() {
     _.each(this.systems, function(system) {
       system.reset();
     });
-  }
+  };
 
   Controller.prototype.addSystem = function(system) {
     this.systems.push(system);
     return this;
-  }
+  };
 
   Controller.prototype.start = function() {
     this.paused = false;
@@ -124,7 +128,7 @@
   Controller.prototype.clear = function() {
       this.context.clearRect(0, 0, this.context.canvas.width,
         this.context.canvas.height);
-  }
+  };
 
   Controller.prototype.draw = function(ctx) {
     ctx.save();
@@ -150,7 +154,7 @@
     ctx.restore();
 
     ctx.restore();
-  }
+  };
 
   Move.Controller = Controller;
 
@@ -172,7 +176,8 @@
       preUpdate: function(delta) {},
       postUpdate: function(delta) {},
       setContext: function(ctx) {},
-      onDeath: function() {}
+      onDeath: function() {},
+      init: function() {}
     });
 
     this.particles = [];
@@ -183,6 +188,7 @@
       that[name] = options[name];
     });
 
+    options.init.call(this);
     this.reset();
   }
 
@@ -191,7 +197,11 @@
     for (var i = 0; i < this.numParticles; i++) {
       this.addParticle();
     }
-  }
+  };
+
+  System.prototype.addRule = function(rule) {
+    this.rules.push(rule);
+  };
 
   System.prototype.draw = function(ctx) {
     this.setContext(ctx);
@@ -275,7 +285,7 @@
       that[name] = options[name];
     });
 
-    options.init.bind(this)();
+    options.init.call(this);
   }
 
   Particle.prototype.drawAll = function(ctx) {
@@ -322,36 +332,55 @@
         particle.vel.multiplyScalar(1 - strength * delta);
       }
     },
-    magnet: function(strength) {
+    attract: function(strength, pos) {
       return function(particle, i, delta) {
-        var temp = new Vector(particle.pos);
-        temp.sub(particle.origPos);
+        var pos2 = pos || particle.origPos,
+            temp = new Vector(particle.pos);
+        temp.sub(pos2);
         particle.vel.sub(temp.multiplyScalar(delta * strength));
       }
     },
-    wallX: function(x) {
+    magnet: function(strength, pos) {
       return function(particle, i, delta) {
-        if ((particle.pos.x > x) !=
-            (particle.pos.x + delta * particle.vel.x > x)) {
-          particle.pos.x = x;
+        var pos2 = pos || particle.origPos,
+            temp = new Vector(particle.pos),
+            lenSq;
+        temp.sub(pos2);
+        lenSq = temp.lengthSq();
+        if (lenSq < .01) return;
+        particle.vel.sub(temp.multiplyScalar(
+            delta * strength / lenSq));
+      }
+    },
+    wallX: function(wx) {
+      return function(particle, i, delta) {
+        var vel = particle.vel.x * delta,
+            pos = particle.pos.x,
+            x = wx + particle.size * (vel > 0 ? -1 : 1);
+        if ((pos > x) != (pos + vel > x)) {
+          particle.pos.x = 2 * x - vel - pos;
           particle.vel.x = -particle.vel.x;
         }
       }
     },
-    wallY: function(y) {
+    wallY: function(wy) {
       return function(particle, i, delta) {
-        if ((particle.pos.y > y) !=
-            (particle.pos.y + delta * particle.vel.y > y)) {
-          particle.pos.y = y;
+        var vel = particle.vel.y * delta,
+            pos = particle.pos.y,
+            y = wy + particle.size * (vel > 0 ? -1 : 1);
+        if ((pos > y) != (pos + vel > y)) {
+          particle.pos.y = 2 * y - vel - pos;
           particle.vel.y = -particle.vel.y;
         }
       }
     },
-    wallZ: function(z) {
+    wallZ: function(wz) {
       return function(particle, i, delta) {
-        if ((particle.pos.z > z) !=
-            (particle.pos.z + delta * particle.vel.z > z)) {
-          particle.pos.z = z;
+        var vel = particle.vel.z * delta,
+            pos = particle.pos.z,
+            z = wz + particle.size * (vel > 0 ? -1 : 1);
+        if ((pos > z) != (pos + vel > z)) {
+          particle.pos.z = 2 * z - vel - pos;
           particle.vel.z = -particle.vel.z;
         }
       }

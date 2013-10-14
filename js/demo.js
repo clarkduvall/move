@@ -105,7 +105,7 @@ $(function() {
     },
     rules: [
       Move.Rules.resistance(.05),
-      Move.Rules.magnet(.01),
+      Move.Rules.attract(.01),
       Move.Rules.wallX(width + 1),
       Move.Rules.wallX(-1),
       Move.Rules.wallY(height + 1),
@@ -147,7 +147,7 @@ $(function() {
     return new Move.System({
       numParticles: 400,
       rules: [
-        Move.Rules.magnet(.01),
+        Move.Rules.attract(.01),
         Move.Rules.wallX(width + 1),
         Move.Rules.wallX(-1),
         Move.Rules.wallY(height + 1),
@@ -185,4 +185,81 @@ $(function() {
 
 
   createPausePlay(controller3);
+
+  ///////////////////
+  // Painting Ball //
+  ///////////////////
+  function bugs2() {
+    var x = _.random(width), y = _.random(height);
+    return new Move.System({
+      numParticles: 2000,
+      setContext: function(ctx) {
+        ctx.globalCompositeOperation = 'source-atop';
+      },
+      newParticle: function(num) {
+        var angle = _.random(0, 628) / 100,
+            strength = _.random(10000) / 100;
+        return new Move.Particle({
+          pos: new Move.Vector({x: x, y: y}),
+          vel: new Move.Vector({
+            x: Math.cos(angle) * strength,
+            y: Math.sin(angle) * strength
+          }),
+          origPos: new Move.Vector({
+            x: _.random(width),
+            y: _.random(height)
+          }),
+          size: 10,
+          r: _.random(255), g: _.random(255), b: _.random(255)
+        });
+      }
+    });
+  }
+
+  function bigBug() {
+    return new Move.System({
+      numParticles: 1,
+      setContext: function(ctx) {
+        ctx.globalCompositeOperation = 'xor';
+      },
+      rules: [
+        Move.Rules.wallX(width + 1),
+        Move.Rules.wallX(-1),
+        Move.Rules.wallY(height + 1),
+        Move.Rules.wallY(-1)
+      ],
+      newParticle: function(num) {
+        var angle = _.random(0, 628) / 100,
+            strength = _.random(2000, 8000) / 100;
+        return new Move.Particle({
+          pos: new Move.Vector({x: width / 2, y: height / 2}),
+          vel: new Move.Vector({
+            x: Math.cos(angle) * strength,
+            y: Math.sin(angle) * strength
+          }),
+          size: 20,
+          trail: 5,
+          r: 255, g: 0, b: 0
+        });
+      }
+    });
+  }
+
+  $('<h2>Painting Ball</h2>').appendTo('body');
+  var controller4 = new Move.Controller({
+        context: createCanvasAndGetCtx('', width, height),
+        speed: 5,
+        trace: true
+      }),
+      bigSystem = bigBug();
+
+  var system = bugs2();
+  for (var j = 0; j < bigSystem.particles.length; j++) {
+    system.addRule(Move.Rules.magnet(500, bigSystem.particles[j].pos));
+  }
+  controller4.addSystem(system);
+  controller4.addSystem(bigSystem);
+
+
+  createPausePlay(controller4);
 });

@@ -51,17 +51,20 @@ $(function() {
 
   $('<h2>3D</h2>').appendTo('body');
   (function demo1() {
-    var camera = new THREE.PerspectiveCamera(55, width / height, 2, 2000),
+    var camera = new THREE.PerspectiveCamera(55, width / height, 2, 4000),
         scene = new THREE.Scene(),
         geometry = new THREE.Geometry(),
         sprite = THREE.ImageUtils.loadTexture('img/ball.png'),
         material,
+        light = new THREE.PointLight(0xffffff),
         particles,
+        particleSize = 85,
         cubeSize = 500,
+        boxSize = cubeSize * 2,
         system = new Move.System({
           rules: [
             Move.Rules.gravity(-100),
-            Move.Rules.resistance(.1),
+            Move.Rules.attract(.2, new Move.Vector()),
             Move.Rules.wallX(cubeSize + 1),
             Move.Rules.wallX(-cubeSize - 1),
             Move.Rules.wallY(cubeSize + 1),
@@ -80,7 +83,7 @@ $(function() {
       return {x: x / len, y: y / len, z: z / len};
     }
 
-    camera.position.z = 1800;
+    camera.position.z = 1400;
 
     for (i = 0; i < 5000; i ++) {
       var angle = _.random(0, 628) / 100,
@@ -92,12 +95,13 @@ $(function() {
         _.random(255), _.random(255), _.random(255)));
       system.addParticle(new Move.Particle({
         pos: vertex,
-        vel: new Move.Vector(randXYZ()).multiplyScalar(strength)
+        vel: new Move.Vector(randXYZ()).multiplyScalar(strength),
+        size: particleSize / 2
       }));
     }
 
     material = new THREE.ParticleBasicMaterial({
-      size: 85,
+      size: particleSize,
       map: sprite,
       vertexColors: true,
       transparent: true
@@ -107,6 +111,18 @@ $(function() {
     particles = new THREE.ParticleSystem(geometry, material);
     particles.sortParticles = true;
     scene.add(particles);
+
+    scene.add(
+        new THREE.Mesh(
+            new THREE.CubeGeometry(boxSize, boxSize, boxSize),
+            new THREE.MeshBasicMaterial({
+              color: 0xffffff,
+              wireframe: true
+            })));
+
+    light.position.set(-500, -500, 1000);
+    scene.add(light);
+
     renderer = new THREE.WebGLRenderer({
       clearAlpha: 1,
       canvas: createCanvas('black', width, height)
