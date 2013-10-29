@@ -591,7 +591,7 @@
   ///         ...
   ///     }
   ///
-  /// Where particle is a |@Particle|, |i| is the index of the particle in the
+  /// Where |particle| is a |@Particle|, |i| is the index of the particle in the
   /// system, and |delta| is the time in seconds since the last update.
   Move.Rules = {
     /// function Rules.gravity
@@ -623,7 +623,7 @@
     },
 
     /// function Rules.attract
-    /// Attracts a particle to a point with the formula (1 / distance).
+    /// Attracts a particle to a point with the formula |1/distance|.
     ///
     /// Params:
     ///   strength {Number}: The strength of the attraction.
@@ -642,7 +642,7 @@
     },
 
     /// function Rules.magnet
-    /// Attracts a particle to a point with the formule (1 / distance^2).
+    /// Attracts a particle to a point with the formula |1/distance^2|.
     ///
     /// Params:
     ///   strength {Number}: The strength of the attraction.
