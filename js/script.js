@@ -1,10 +1,11 @@
 $(function() {
   var $canvas = $('#canvas'),
       canvas = $canvas[0],
-      editor = CodeMirror(document.body, {
+      editor = CodeMirror($('#demo')[0], {
         mode: "javascript",
+        matchBrackets: true,
         lineNumbers: true,
-        theme: 'solarized',
+        theme: 'green',
         tabSize: 2,
         extraKeys: {
           Tab: function(cm) {
@@ -21,12 +22,13 @@ $(function() {
         }
       }, 1000),
       $canvas = $('#canvas'),
-      ctx = $canvas[0].getContext('2d');
+      ctx = $canvas[0].getContext('2d'),
+      height = $('.CodeMirror').height();
 
   canvas.width = $canvas.width();
   canvas.style.width = $canvas.width() + 'px';
-  canvas.height = '700';
-  canvas.style.height = '700px';
+  canvas.height = height;
+  canvas.style.height = height + 'px';
 
   function getScript(name) {
     $.getScript('examples/' + name).done(function(script) {
@@ -35,7 +37,7 @@ $(function() {
       editor.on('change', update);
 
       ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
-    }).fail(function(a, b, c) {console.log(c); });
+    });
   }
 
   $.getJSON('examples/list.json').done(function(data) {
@@ -44,6 +46,7 @@ $(function() {
       $select.append($('<option></option>').val(name).html(name));
     });
     $select.change(function() {
+      console.log('FOO');
       getScript($select.find(':selected').val());
     });
     $select.change();

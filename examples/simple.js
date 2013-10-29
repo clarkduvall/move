@@ -1,3 +1,4 @@
+// <-- Select another option to see more!
 var $canvas = $('#canvas'),
     width = $canvas.width(),
     height = $canvas.height(),
@@ -17,10 +18,10 @@ controller.addSystem(new Move.System({
   // Set rules.
   rules: [
     // Wall on the bottom.
-    Move.Rules.wallY(height),
+    Move.Rules.wall(height, 'y'),
 
     // Wall on the top.
-    Move.Rules.wallY(0)
+    Move.Rules.wall(0, 'y')
   ],
 
   // Specify the function used to create a new Particle in this System.
