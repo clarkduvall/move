@@ -46,7 +46,6 @@ $(function() {
       $select.append($('<option></option>').val(name).html(name));
     });
     $select.change(function() {
-      console.log('FOO');
       getScript($select.find(':selected').val());
     });
     $select.change();
