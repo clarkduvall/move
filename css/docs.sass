@@ -80,8 +80,14 @@ a
       padding-left: 2 * $baseSpacing
       border-left: 5px solid $mid
 
-      & > li
-        border-bottom: 3px dotted $dark
+      & li
+        border-bottom: 3px dotted $darkest
+
+        & li
+          border-bottom: 2px dotted $dark
+
+          & li
+            border-bottom: 1px dotted $mid
 
   .inner > p:first-child
     margin-top: 0
