@@ -42,6 +42,14 @@ a {
     display: inline-block;
     font-size: 20px;
     font-weight: bold; }
+  #docs .anchor:before {
+    content: " -> link";
+    font-size: 70%;
+    position: relative;
+    top: -0.1em; }
+  #docs .anchor-link {
+    border: none;
+    color: #666666; }
   #docs li:hover {
     background: rgba(239, 0, 255, 0.1); }
   #docs li {
@@ -59,12 +67,8 @@ a {
     #docs > div > div > div > ul, #docs > div > div > ul {
       padding-left: 20px;
       border-left: 5px solid #53bf00; }
-      #docs > div > div > div > ul li, #docs > div > div > ul li {
-        border-bottom: 3px dotted #1c4000; }
-        #docs > div > div > div > ul li li, #docs > div > div > ul li li {
-          border-bottom: 2px dotted #377f00; }
-          #docs > div > div > div > ul li li li, #docs > div > div > ul li li li {
-            border-bottom: 1px dotted #53bf00; }
+      #docs > div > div > div > ul > li, #docs > div > div > ul > li {
+        border-bottom: 3px dotted #377f00; }
   #docs .inner > p:first-child {
     margin-top: 0; }
   #docs code {

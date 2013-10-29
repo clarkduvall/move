@@ -38,4 +38,17 @@ $(function() {
   $('.docs-toggle').each(function() {
     $('#inner-' + $(this).data('toggle')).animate({height: 'hide'}, 0);
   });
+
+  $('.anchor').hide();
+  $('h3, h4').hover(function() {
+    $(this).find('.anchor').show();
+  }, function() {
+    $(this).find('.anchor').hide();
+  });
+
+  if (window.location.hash) {
+    var $item = $(window.location.hash);
+    $item.parents('[id^=inner-]').show();
+    scroll($item);
+  }
 });

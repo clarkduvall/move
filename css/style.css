@@ -9,7 +9,7 @@ a {
   font-weight: bold; }
   a:hover {
     text-shadow: 5px 0 15px #377f00, -5px 0 15px #377f00, 0 5px 15px #377f00, 0 -5px 15px #377f00, 5px 5px 15px #377f00, -5px 5px 15px #377f00, -5px 5px 15px #377f00, -5px -5px 15px #377f00;
-    color: white; }
+    color: white !important; }
 
 body {
   margin: 0 0 20px 0;

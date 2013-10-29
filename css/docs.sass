@@ -55,6 +55,16 @@ a
     font-size: 20px
     font-weight: bold
 
+  .anchor:before
+    content: " -> link"
+    font-size: 70%
+    position: relative
+    top: -.1em
+
+  .anchor-link
+    border: none
+    color: #666
+
   li:hover
     background: rgba(#ef00ff, .1)
 
@@ -80,14 +90,8 @@ a
       padding-left: 2 * $baseSpacing
       border-left: 5px solid $mid
 
-      & li
-        border-bottom: 3px dotted $darkest
-
-        & li
-          border-bottom: 2px dotted $dark
-
-          & li
-            border-bottom: 1px dotted $mid
+      & > li
+        border-bottom: 3px dotted $dark
 
   .inner > p:first-child
     margin-top: 0
