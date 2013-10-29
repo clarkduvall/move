@@ -47,10 +47,10 @@ var $canvas = $('#canvas'),
         ctx.globalCompositeOperation = 'destination-over';
       },
       rules: [
-        Move.Rules.wallX(width),
-        Move.Rules.wallX(0),
-        Move.Rules.wallY(height),
-        Move.Rules.wallY(0)
+        Move.Rules.wall(width, 'x'),
+        Move.Rules.wall(0, 'x'),
+        Move.Rules.wall(height, 'y'),
+        Move.Rules.wall(0, 'y')
       ],
       newParticle: function(num) {
         var angle = Math.random() * Math.PI * 2,

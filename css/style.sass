@@ -1,0 +1,72 @@
+@import base
+
+a
+  +transition(all, .15s, ease-in)
+  text-decoration: none
+  color: inherit
+  font-weight: bold
+
+  &:hover
+    +shadow-surround(5px, 15px, $dark)
+    color: white
+
+body
+  margin: 0 0 2 * $baseSpacing 0
+  font-family: "Open Sans", sans-serif
+  background: #eee
+
+.container
+  position: relative
+  max-width: 1440px
+  min-width: 980px
+  margin: auto
+
+  nav
+    +shadow-surround(5px, 15px, white)
+    width: 100%
+    padding: $baseSpacing
+    font-size: 16px
+    font-weight: bold
+
+    .brand
+      font-size: 20px
+
+footer
+  margin: $baseSpacing * 2
+  text-align: center
+  color: #333
+
+.content
+  margin: $baseSpacing * 2
+  font-size: 16px
+
+.horizontal
+  display: inline-block
+
+  li
+    display: inline-block
+    list-style: none
+    margin: 0 $baseSpacing 0 $baseSpacing
+
+#demo
+  position: relative
+
+  canvas
+    background: black
+    float: left
+    width: 50%
+
+  select
+    position: absolute
+    top: 0
+    right: 50%
+    z-index: 1000
+    font-family: monospace
+    font-size: 14px
+    background: $darkest
+    color: $lightest
+
+  .CodeMirror
+    height: 750px
+    font-size: 14px
+    overflow: hidden

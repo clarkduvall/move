@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/codemirror.css">
+  <link rel="stylesheet" href="css/green.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/docs.css">
+  <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Open Sans']
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <a href="https://github.com/clark-duvall/move"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <nav>
+      <span class="brand"><a href="/">Move.js</a></span>
+      <ul class="horizontal">
+        <li><a href="documentation.html">Documentation</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <h1>Move.js Documentation</h1>
+      <div id="toc"><ul>
+        <li><a data-toggle="class-vector" class="toc-top" href="#class-vector">Vector</a><ul>
+        <b>Functions</b>
+        <li><a href="#function-vector-add" data-parent="class-vector">add</a></li>
+        <li><a href="#function-vector-sub" data-parent="class-vector">sub</a></li>
+        <li><a href="#function-vector-mulitplyscalar" data-parent="class-vector">mulitplyScalar</a></li>
+        <li><a href="#function-vector-length" data-parent="class-vector">length</a></li>
+        <li><a href="#function-vector-lengthsq" data-parent="class-vector">lengthSq</a></li>
+        </ul></li>
+        <li><a data-toggle="class-controller" class="toc-top" href="#class-controller">Controller</a><ul>
+        <b>Functions</b>
+        <li><a href="#function-controller-reset" data-parent="class-controller">reset</a></li>
+        <li><a href="#function-controller-addsystem" data-parent="class-controller">addSystem</a></li>
+        <li><a href="#function-controller-start" data-parent="class-controller">start</a></li>
+        <li><a href="#function-controller-pause" data-parent="class-controller">pause</a></li>
+        <li><a href="#function-controller-draw" data-parent="class-controller">draw</a></li>
+        </ul><ul>
+        <b>Properties</b>
+        <li><a href="#property-controller-systems" data-parent="class-controller">systems</a></li>
+        </ul></li>
+        <li><a data-toggle="class-system" class="toc-top" href="#class-system">System</a><ul>
+        <b>Functions</b>
+        <li><a href="#function-system-reset" data-parent="class-system">reset</a></li>
+        <li><a href="#function-system-addrule" data-parent="class-system">addRule</a></li>
+        <li><a href="#function-system-addparticle" data-parent="class-system">addParticle</a></li>
+        </ul><ul>
+        <b>Properties</b>
+        <li><a href="#property-system-particles" data-parent="class-system">particles</a></li>
+        </ul></li>
+        <li><a data-toggle="class-particle" class="toc-top" href="#class-particle">Particle</a><ul>
+        <b>Functions</b>
+        <li><a href="#function-particle-draw" data-parent="class-particle">draw</a></li>
+        </ul><ul>
+        <b>Properties</b>
+        <li><a href="#property-particle-pos" data-parent="class-particle">pos</a></li>
+        <li><a href="#property-particle-vel" data-parent="class-particle">vel</a></li>
+        <li><a href="#property-particle-origpos" data-parent="class-particle">origPos</a></li>
+        <li><a href="#property-particle-r" data-parent="class-particle">r</a></li>
+        <li><a href="#property-particle-g" data-parent="class-particle">g</a></li>
+        <li><a href="#property-particle-b" data-parent="class-particle">b</a></li>
+        <li><a href="#property-particle-a" data-parent="class-particle">a</a></li>
+        <li><a href="#property-particle-size" data-parent="class-particle">size</a></li>
+        </ul></li>
+        <li><a data-toggle="object-rules" class="toc-top" href="#object-rules">Rules</a><ul>
+        <b>Functions</b>
+        <li><a href="#function-rules-gravity" data-parent="object-rules">gravity</a></li>
+        <li><a href="#function-rules-resistance" data-parent="object-rules">resistance</a></li>
+        <li><a href="#function-rules-attract" data-parent="object-rules">attract</a></li>
+        <li><a href="#function-rules-magnet" data-parent="object-rules">magnet</a></li>
+        <li><a href="#function-rules-wall" data-parent="object-rules">wall</a></li>
+        </ul></li>
+      </ul></div>
+<!-- START DOCS -->
+      <div id="docs">
+        <div>
+          <a href="#" class="docs-toggle" data-toggle="class-vector"><h2 id="class-vector">class Vector</h2></a>
+          <div class="inner" id="inner-class-vector">
+            <p> A simple 3D vector.</p>
+            <code class="example">var v = new Move.Vector({x: 10, y: 0, z: 5});<br/>v.multiplyScalar(2);<br/>console.log(v.x);<br/>> 20</code>
+            <div><span class="param-heading">Constructor params:</span>
+            <ul>
+              <li>
+                <h4 id="class-vector-options">Object options</h4>
+                <p>Options to initialize this <code><a href="#class-vector" data-parent="class-vector">Vector</a></code>.</p>
+                <div><span class="param-heading">Properties:</span>
+                <ul>
+                  <li>
+                    <h4 id="class-vector-options-x"><span class="optional">optional</span> Number x: 0</h4>
+                    <p>x coordinate</p>
+                  </li>
+                  <li>
+                    <h4 id="class-vector-options-y"><span class="optional">optional</span> Number y: 0</h4>
+                    <p>y coordinate</p>
+                  </li>
+                  <li>
+                    <h4 id="class-vector-options-z"><span class="optional">optional</span> Number z: 0</h4>
+                    <p>z coordinate</p>
+                  </li>
+                </ul></div>
+              </li>
+            </ul></div>
+            <span class="prop-heading">Functions:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="function-vector-add"><a href="#class-vector" data-parent="class-vector">Vector</a> add(<a href="#class-vector" data-parent="class-vector">Vector</a> other)</h3>
+                <p> Add two <code><a href="#class-vector" data-parent="class-vector">Vector</a></code> together.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-vector-add-other"><a href="#class-vector" data-parent="class-vector">Vector</a> other</h4>
+                    <p>The <code><a href="#class-vector" data-parent="class-vector">Vector</a></code> to add.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: <a href="#class-vector" data-parent="class-vector">Vector</a></span>
+                <p><code>this</code></p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-vector-sub"><a href="#class-vector" data-parent="class-vector">Vector</a> sub(<a href="#class-vector" data-parent="class-vector">Vector</a> other)</h3>
+                <p> Subtracts one <code><a href="#class-vector" data-parent="class-vector">Vector</a></code> from another.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-vector-sub-other"><a href="#class-vector" data-parent="class-vector">Vector</a> other</h4>
+                    <p>The <code><a href="#class-vector" data-parent="class-vector">Vector</a></code> to subtract.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: <a href="#class-vector" data-parent="class-vector">Vector</a></span>
+                <p><code>this</code></p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-vector-mulitplyscalar"><a href="#class-vector" data-parent="class-vector">Vector</a> mulitplyScalar(Number scalar)</h3>
+                <p> Multiplies this <code><a href="#class-vector" data-parent="class-vector">Vector</a></code> by a scalar.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-vector-mulitplyscalar-scalar">Number scalar</h4>
+                    <p>The scalar to multiply by.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: <a href="#class-vector" data-parent="class-vector">Vector</a></span>
+                <p><code>this</code></p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-vector-length"><a href="#class-vector" data-parent="class-vector">Vector</a> length()</h3>
+                <p> Gets the length of this <code><a href="#class-vector" data-parent="class-vector">Vector</a></code>.</p>
+                <span class="return-heading">Returns: <a href="#class-vector" data-parent="class-vector">Vector</a></span>
+                <p><code>this</code></p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-vector-lengthsq"><a href="#class-vector" data-parent="class-vector">Vector</a> lengthSq()</h3>
+                <p> Gets the squared length of this <code><a href="#class-vector" data-parent="class-vector">Vector</a></code>.</p>
+                <span class="return-heading">Returns: <a href="#class-vector" data-parent="class-vector">Vector</a></span>
+                <p><code>this</code></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <a href="#" class="docs-toggle" data-toggle="class-controller"><h2 id="class-controller">class Controller</h2></a>
+          <div class="inner" id="inner-class-controller">
+            <p> Handles everything relating to a single canvas.</p>
+            <code class="example">var controller = new Move.Controller({<br/>&nbsp;&nbsp;&nbsp;&nbsp;context: document.getElementById('canvas').getContext('2d')<br/>});<br/><br/>controller.addSystem(new Move.System({...}));<br/>controller.start();</code>
+            <div><span class="param-heading">Constructor params:</span>
+            <ul>
+              <li>
+                <h4 id="class-controller-options">Object options</h4>
+                <p>Options for the controller.</p>
+                <div><span class="param-heading">Properties:</span>
+                <ul>
+                  <li>
+                    <h4 id="class-controller-options-context">Context2D context</h4>
+                    <p>The context this controller will draw on.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-controller-options-trace"><span class="optional">optional</span> Boolean trace: false</h4>
+                    <p>Whether the canvas will be cleared every frame.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-controller-options-speed"><span class="optional">optional</span> Number speed: 1</h4>
+                    <p>The speed the simulation moves at.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-controller-options-draw"><span class="optional">optional</span> Function draw(Context2D ctx): <a href="#function-controller-draw" data-parent="class-controller">Controller.draw</a></h4>
+                    <p>The function used to draw the particle systems this controller handles to the canvas.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-controller-options-draw-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-controller-options-predraw"><span class="optional">optional</span> Function preDraw(Context2D ctx)</h4>
+                    <p>Called right before draw().</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-controller-options-predraw-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-controller-options-postdraw"><span class="optional">optional</span> Function postDraw(Context2D ctx)</h4>
+                    <p>Called right after draw().</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-controller-options-postdraw-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-controller-options-setcontext"><span class="optional">optional</span> Function setContext(Context2D ctx)</h4>
+                    <p>Sets up the context before any draw calls are made.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-controller-options-setcontext-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                </ul></div>
+              </li>
+            </ul></div>
+            <span class="prop-heading">Functions:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="function-controller-reset">reset()</h3>
+                <p>Resets the <code><a href="#class-system" data-parent="class-system">System</a></code> this controller is in charge of.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-controller-addsystem">addSystem(<a href="#class-system" data-parent="class-system">System</a> system)</h3>
+                <p> Adds a system to this controller.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-controller-addsystem-system"><a href="#class-system" data-parent="class-system">System</a> system</h4>
+                    <p>The system to add.</p>
+                  </li>
+                </ul></div>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-controller-start">start()</h3>
+                <p>Begin or resume the simulation.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-controller-pause">pause()</h3>
+                <p>Pause the simulation.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-controller-draw">draw(Context2D ctx)</h3>
+                <p> Draws the systems this controller is in charge of to the canvas.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-controller-draw-ctx">Context2D ctx</h4>
+                    <p>The context to draw on.</p>
+                  </li>
+                </ul></div>
+              </li>
+            </ul>
+            <span class="prop-heading">Properties:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="property-controller-systems"><a href="#class-system" data-parent="class-system">System</a>[] systems</h3>
+                <p>The <code><a href="#class-system" data-parent="class-system">System</a></code> this controller is in charge of.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <a href="#" class="docs-toggle" data-toggle="class-system"><h2 id="class-system">class System</h2></a>
+          <div class="inner" id="inner-class-system">
+            <p> A particle system.</p>
+            <code class="example">var system = new Move.System({<br/>&nbsp;&nbsp;&nbsp;&nbsp;numParticles: 100,<br/>&nbsp;&nbsp;&nbsp;&nbsp;rules: [...],<br/>&nbsp;&nbsp;&nbsp;&nbsp;newParticle: function(numParticles) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Move.Particle({...});<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>});<br/><br/>controller.addSystem(system);</code>
+            <div><span class="param-heading">Constructor params:</span>
+            <ul>
+              <li>
+                <h4 id="class-system-options">Object options</h4>
+                <p>Options for the system.</p>
+                <div><span class="param-heading">Properties:</span>
+                <ul>
+                  <li>
+                    <h4 id="class-system-options-newparticle">Function newParticle(Number numParticles)</h4>
+                    <p>Creates a new <code><a href="#class-particle" data-parent="class-particle">Particle</a></code> for the system.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-system-options-newparticle-numparticles">Number numParticles</h4>
+                        <p>The current number of particles in the system.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-numparticles"><span class="optional">optional</span> Number numParticles: 0</h4>
+                    <p>The number of particles to start this system with.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-rules"><span class="optional">optional</span> Function[] rules: []</h4>
+                    <p>The starting set of <code><a href="#object-rules" data-parent="object-rules">Rules</a></code> for this system.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-predraw"><span class="optional">optional</span> Function preDraw(Context2D ctx)</h4>
+                    <p>Called right before the <code><a href="#class-particle" data-parent="class-particle">Particle</a></code> in the system are drawn.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-system-options-predraw-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-postdraw"><span class="optional">optional</span> Function postDraw(Context2D ctx)</h4>
+                    <p>Called right after the <code><a href="#class-particle" data-parent="class-particle">Particle</a></code> in the system are drawn.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-system-options-postdraw-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-preupdate"><span class="optional">optional</span> Function preUpdate(Number delta)</h4>
+                    <p>Called right before the update step where the new positions for the <code><a href="#class-particle" data-parent="class-particle">Particle</a></code> in the system are computed.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-system-options-preupdate-delta">Number delta</h4>
+                        <p>The change in time since the last update in seconds.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-postupdate"><span class="optional">optional</span> Function postUpdate(Number delta)</h4>
+                    <p>Called right after the update step.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-system-options-postupdate-delta">Number delta</h4>
+                        <p>The change in time since the last update in seconds.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-setcontext"><span class="optional">optional</span> Function setContext(Context2D ctx)</h4>
+                    <p>Sets up the context before any draw calls are made for this system.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-system-options-setcontext-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-ondeath"><span class="optional">optional</span> Function onDeath()</h4>
+                    <p>Called when a particle dies.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-system-options-init"><span class="optional">optional</span> Function init()</h4>
+                    <p>Do custom initialization such as adding properties to this.</p>
+                  </li>
+                </ul></div>
+              </li>
+            </ul></div>
+            <span class="prop-heading">Functions:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="function-system-reset">reset()</h3>
+                <p>Resets this system, and regenerates starting particles.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-system-addrule">addRule(Function rule)</h3>
+                <p> Adds a rule to this system. Rules are explained more in the <code><a href="#object-rules" data-parent="object-rules">Rules</a></code> object.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-system-addrule-rule">Function rule(<a href="#class-particle" data-parent="class-particle">Particle</a> particle, Number i, Number delta)</h4>
+                    <p>The rule to add.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="function-system-addrule-rule-particle"><a href="#class-particle" data-parent="class-particle">Particle</a> particle</h4>
+                        <p>The particle to operate on.</p>
+                      </li>
+                      <li>
+                        <h4 id="function-system-addrule-rule-i">Number i</h4>
+                        <p>The index of the particle in the system.</p>
+                      </li>
+                      <li>
+                        <h4 id="function-system-addrule-rule-delta">Number delta</h4>
+                        <p>The time in seconds since the last update.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                </ul></div>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-system-addparticle">addParticle([<a href="#class-particle" data-parent="class-particle">Particle</a> particle])</h3>
+                <p> Adds a new <code><a href="#class-particle" data-parent="class-particle">Particle</a></code> to the system.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-system-addparticle-particle"><span class="optional">optional</span> <a href="#class-particle" data-parent="class-particle">Particle</a> particle</h4>
+                    <p>The particle to add. Defaults to the result of calling the <code>newParticle()</code> function passed in to the <code><a href="#class-system" data-parent="class-system">System</a></code>.</p>
+                  </li>
+                </ul></div>
+              </li>
+            </ul>
+            <span class="prop-heading">Properties:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="property-system-particles"><a href="#class-particle" data-parent="class-particle">Particle</a>[] particles</h3>
+                <p>The <code><a href="#class-particle" data-parent="class-particle">Particle</a></code> in this system.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <a href="#" class="docs-toggle" data-toggle="class-particle"><h2 id="class-particle">class Particle</h2></a>
+          <div class="inner" id="inner-class-particle">
+            <p> A particle in a particle system.</p>
+            <code class="example">var particle = new Move.Particle({<br/>&nbsp;&nbsp;&nbsp;&nbsp;pos: new Move.Vector({x: 10, y: 5}),<br/>&nbsp;&nbsp;&nbsp;&nbsp;vel: new Move.Vector({x: 1, y: 1}),<br/>&nbsp;&nbsp;&nbsp;&nbsp;r: 10, g: 100, b: 255<br/>});<br/><br/>system.addParticle(particle);</code>
+            <div><span class="param-heading">Constructor params:</span>
+            <ul>
+              <li>
+                <h4 id="class-particle-options">Object options</h4>
+                <p>Options for the particle.</p>
+                <div><span class="param-heading">Properties:</span>
+                <ul>
+                  <li>
+                    <h4 id="class-particle-options-pos"><span class="optional">optional</span> <a href="#class-vector" data-parent="class-vector">Vector</a> pos: new Vector()</h4>
+                    <p>The starting position of the particle.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-vel"><span class="optional">optional</span> <a href="#class-vector" data-parent="class-vector">Vector</a> vel: new Vector()</h4>
+                    <p>The starting velocity of the particle.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-r"><span class="optional">optional</span> Number r: 255</h4>
+                    <p>Red value.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-g"><span class="optional">optional</span> Number g: 0</h4>
+                    <p>Green value.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-b"><span class="optional">optional</span> Number b: 0</h4>
+                    <p>Blue value.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-a"><span class="optional">optional</span> Number a: 1</h4>
+                    <p>Alpha value.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-size"><span class="optional">optional</span> Number size: 2</h4>
+                    <p>Size of the particle.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-trail"><span class="optional">optional</span> Number trail: 0</h4>
+                    <p>Whether this particle will have a trail. The trail created by drawing increasingly transparent versions of the particle at previous positions. A trail of 10 will use the 10 last positions.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-draw"><span class="optional">optional</span> Function draw(Context2D ctx, Number opacity, <a href="#class-vector" data-parent="class-vector">Vector</a> pos): <a href="#function-particle-draw" data-parent="class-particle">Particle.draw</a></h4>
+                    <p>Determines how this particle should be drawn on the canvas. The default draw function draws the particle as a circle.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-particle-options-draw-ctx">Context2D ctx</h4>
+                        <p>The context to draw on.</p>
+                      </li>
+                      <li>
+                        <h4 id="class-particle-options-draw-opacity">Number opacity</h4>
+                        <p>If this particle has a trail, the opacity will be a number from 0 - 1 that represents how transparent the particle should be. 0 means completely transparent and 1 means completely opaque.</p>
+                      </li>
+                      <li>
+                        <h4 id="class-particle-options-draw-pos"><a href="#class-vector" data-parent="class-vector">Vector</a> pos</h4>
+                        <p>The position to draw at. This may be different than the particle's position if one of the tail sections is being drawn.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-preupdate"><span class="optional">optional</span> Function preUpdate(Number delta)</h4>
+                    <p>Function called before particle update.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-particle-options-preupdate-delta">Number delta</h4>
+                        <p>The change in time since the last update in seconds.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-postupdate"><span class="optional">optional</span> Function postUpdate(Number delta)</h4>
+                    <p>Function called after particle update.</p>
+                    <div><span class="param-heading">Params:</span>
+                    <ul>
+                      <li>
+                        <h4 id="class-particle-options-postupdate-delta">Number delta</h4>
+                        <p>The change in time since the last update in seconds.</p>
+                      </li>
+                    </ul></div>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-isdead"><span class="optional">optional</span> Function isDead()</h4>
+                    <p>Function called after every update. If it returns true, the particle is removed from the <code><a href="#class-system" data-parent="class-system">System</a></code>, and <code><a href="#class-system" data-parent="class-system">System</a>.onDeath</code> is called.</p>
+                  </li>
+                  <li>
+                    <h4 id="class-particle-options-init"><span class="optional">optional</span> Function init()</h4>
+                    <p>Do custom initialization on this particle.</p>
+                  </li>
+                </ul></div>
+              </li>
+            </ul></div>
+            <span class="prop-heading">Functions:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="function-particle-draw">draw(Context2D ctx, Number opacity, <a href="#class-vector" data-parent="class-vector">Vector</a> pos)</h3>
+                <p> The default draw function. Draws the particle as a circle.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-particle-draw-ctx">Context2D ctx</h4>
+                    <p>The context to draw on.</p>
+                  </li>
+                  <li>
+                    <h4 id="function-particle-draw-opacity">Number opacity</h4>
+                    <p>If this particle has a trail, the opacity will be a number from 0 - 1 that represents how transparent the particle should be. 0 means completely transparent and 1 means completely opaque.</p>
+                  </li>
+                  <li>
+                    <h4 id="function-particle-draw-pos"><a href="#class-vector" data-parent="class-vector">Vector</a> pos</h4>
+                    <p>The position to draw at. This may be different than the particle's position if one of the tail sections is being drawn.</p>
+                  </li>
+                </ul></div>
+              </li>
+            </ul>
+            <span class="prop-heading">Properties:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="property-particle-pos"><a href="#class-vector" data-parent="class-vector">Vector</a> pos</h3>
+                <p>The position of the particle.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="property-particle-vel"><a href="#class-vector" data-parent="class-vector">Vector</a> vel</h3>
+                <p>The velocity of the particle.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="property-particle-origpos"><a href="#class-vector" data-parent="class-vector">Vector</a> origPos</h3>
+                <p>The original position of the particle.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="property-particle-r">Number r</h3>
+                <p>The red value of the color of the particle.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="property-particle-g">Number g</h3>
+                <p>The green value of the color of the particle.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="property-particle-b">Number b</h3>
+                <p>The blue value of the color of the particle.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="property-particle-a">Number a</h3>
+                <p>The alpha value of the color of the particle.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="property-particle-size">Number size</h3>
+                <p>The size of the particle.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <a href="#" class="docs-toggle" data-toggle="object-rules"><h2 id="object-rules">object Rules</h2></a>
+          <div class="inner" id="inner-object-rules">
+            <p> Rules can be added to a system to specify its behavior. The <code><a href="#object-rules" data-parent="object-rules">Rules</a></code> object has some starter rules, but a complex system will probably have some custom rules.</p>
+            <p>Rules are functions of the form:</p>
+            <code class="example">function(particle, i, delta) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;...<br/>}</code>
+            <p>Where particle is a <code><a href="#class-particle" data-parent="class-particle">Particle</a></code>, <code>i</code> is the index of the particle in the system, and <code>delta</code> is the time in seconds since the last update.</p>
+            <span class="prop-heading">Functions:</span>
+            <ul>
+              <li>
+                <h3 class="api-item" id="function-rules-gravity">Function gravity(Number strength)</h3>
+                <p> Pulls the particle downward.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-rules-gravity-strength">Number strength</h4>
+                    <p>The strength of the gravity.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: Function</span>
+                <p>A gravity rule that can be passed to <code><a href="#function-system-addrule" data-parent="class-system">System.addRule</a></code>.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-rules-resistance">Function resistance(Number strength)</h3>
+                <p> Slows a particle over time.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-rules-resistance-strength">Number strength</h4>
+                    <p>The strength of the resistance.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: Function</span>
+                <p>A resistance rule that can be passed to <code><a href="#function-system-addrule" data-parent="class-system">System.addRule</a></code>.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-rules-attract">Function attract(Number strength, [<a href="#class-vector" data-parent="class-vector">Vector</a> pos])</h3>
+                <p> Attracts a particle to a point with the formula (1 / distance).</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-rules-attract-strength">Number strength</h4>
+                    <p>The strength of the attraction.</p>
+                  </li>
+                  <li>
+                    <h4 id="function-rules-attract-pos"><span class="optional">optional</span> <a href="#class-vector" data-parent="class-vector">Vector</a> pos: <a href="#property-particle-origpos" data-parent="class-particle">Particle.origPos</a></h4>
+                    <p>The point to attract to.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: Function</span>
+                <p>An attraction rule that can be passed to <code><a href="#function-system-addrule" data-parent="class-system">System.addRule</a></code>.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-rules-magnet">Function magnet(Number strength, [<a href="#class-vector" data-parent="class-vector">Vector</a> pos])</h3>
+                <p> Attracts a particle to a point with the formule (1 / distance^2).</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-rules-magnet-strength">Number strength</h4>
+                    <p>The strength of the attraction.</p>
+                  </li>
+                  <li>
+                    <h4 id="function-rules-magnet-pos"><span class="optional">optional</span> <a href="#class-vector" data-parent="class-vector">Vector</a> pos: <a href="#property-particle-origpos" data-parent="class-particle">Particle.origPos</a></h4>
+                    <p>The point to attract to.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: Function</span>
+                <p>A magnetism rule that can be passed to <code><a href="#function-system-addrule" data-parent="class-system">System.addRule</a></code>.</p>
+              </li>
+              <li>
+                <h3 class="api-item" id="function-rules-wall">Function wall(<a href="#class-vector" data-parent="class-vector">Vector</a> pos, String coord)</h3>
+                <p> Creates a wall that particles will bounce off of.</p>
+                <div><span class="param-heading">Params:</span>
+                <ul>
+                  <li>
+                    <h4 id="function-rules-wall-pos"><a href="#class-vector" data-parent="class-vector">Vector</a> pos</h4>
+                    <p>The position of the wall.</p>
+                  </li>
+                  <li>
+                    <h4 id="function-rules-wall-coord">String coord</h4>
+                    <p>The coordinate of the wall. Can be <code>'x'</code>, <code>'y'</code>, or <code>'z'</code>.</p>
+                  </li>
+                </ul></div>
+                <span class="return-heading">Returns: Function</span>
+                <p>A wall rule that can be passed to <code><a href="#function-system-addrule" data-parent="class-system">System.addRule</a></code>.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+<!-- END DOCS -->
+    </div>
+  </div>
+  <footer>© 2013 <a href="http://clarkduvall.com">Clark DuVall</a></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/codemirror-min.js"></script>
+  <script type="text/javascript" src="js/underscore-min.js"></script>
+  <script type="text/javascript" src="js/move.js"></script>
+  <script type="text/javascript" src="js/nav.js"></script>
+  <script type="text/javascript" src="js/docs.js"></script>
+</body>
+</html>

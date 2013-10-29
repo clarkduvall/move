@@ -79,7 +79,7 @@ function createFirework() {
 
         // Custom draw function that decreases opacity closer to death.
         draw: function(ctx, opacity, pos) {
-            opacity = opacity * (1 - 1000 * this.lifespan / this.death);
+            opacity = opacity * (1 - this.lifespan / this.death);
             this.defaults.draw(ctx, opacity, pos);
         },
 
@@ -91,13 +91,13 @@ function createFirework() {
         // Init function called when particle is created that can add particle
         // specific variables.
         init: function() {
-          this.death = _.random(25000, 40000);
+          this.death = _.random(25, 40);
           this.lifespan = 0;
         },
 
         // Checks if the particle is dead or not.
         isDead: function() {
-          return this.lifespan * 1000 > this.death;
+          return this.lifespan > this.death;
         }
       });
     }

@@ -1,0 +1,17 @@
+$baseSpacing: 10px
+
+$darkest: #1C4000
+$dark: #377F00
+$mid: #53BF00
+$light: #63E500
+$lightest: #6EFF00
+
+@mixin shadow-surround($offset, $blur, $color)
+  text-shadow: $offset 0 $blur $color, (-$offset) 0 $blur $color, 0 $offset $blur $color, 0 (-$offset) $blur $color, $offset $offset $blur $color, (-$offset) $offset $blur $color, (-$offset) $offset $blur $color, (-$offset) (-$offset) $blur $color
+
+@mixin transition($transition-property, $transition-time, $method)
+  -webkit-transition: $transition-property $transition-time $method
+  -moz-transition: $transition-property $transition-time $method
+  -ms-transition: $transition-property $transition-time $method
+  -o-transition: $transition-property $transition-time $method
+  transition: $transition-property $transition-time $method

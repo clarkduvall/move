@@ -1,0 +1,113 @@
+@import base
+
+#toc
+  font-size: 20px
+  width: 200px
+  position: absolute
+
+  & > ul:first-child
+    margin-top: 0
+
+  & > ul > li > ul
+    font-size: 16px
+
+  & > ul > li > a
+    margin-top: $baseSpacing * 2
+    display: inline-block
+
+  & > ul > li:first-child > a
+    margin-top: 0
+
+  a
+    font-weight: inherit
+
+  & > li > ul
+    margin-bottom: $baseSpacing
+
+  li
+    list-style: none
+
+  b
+    font-size: 18px
+    margin-left: -2 * $baseSpacing
+    margin-top: $baseSpacing
+    display: block
+
+a
+  border-bottom: 1px black dotted
+  font-weight: bold
+
+#docs
+  margin-left: 200px
+  padding-left: 2 * $baseSpacing
+  border-left: 5px solid $darkest
+
+  .return-heading,
+  .param-heading
+    margin: $baseSpacing 0 0 0
+    display: inline-block
+    font-size: 18px
+    font-weight: bold
+
+  .prop-heading
+    margin: $baseSpacing 0 0 0
+    display: inline-block
+    font-size: 20px
+    font-weight: bold
+
+  li:hover
+    background: rgba(#ef00ff, .1)
+
+  li
+    padding-left: 4 * $baseSpacing
+    margin-bottom: 3 * $baseSpacing
+
+  h4, h3
+    margin: $baseSpacing 0 $baseSpacing -4 * $baseSpacing
+
+  p
+    margin: $baseSpacing 0 $baseSpacing 0
+
+  ul, li
+    list-style: none
+
+  & > div > div
+    padding-left: 2 * $baseSpacing
+    border-left: 5px solid $dark
+
+    & > div > ul,
+    & > ul
+      padding-left: 2 * $baseSpacing
+      border-left: 5px solid $mid
+
+      & > li
+        border-bottom: 3px dotted $dark
+
+      & > li > div > ul
+        padding-left: 2 * $baseSpacing
+        border-left: 5px solid $light
+
+        & > li > div > ul
+          padding-left: 2 * $baseSpacing
+          border-left: 5px solid $lightest
+
+  .inner > p:first-child
+    margin-top: 0
+
+  code
+    color: $dark
+
+    &.example
+      margin: 0 2 * $baseSpacing 0 2 * $baseSpacing
+      padding: 2 * $baseSpacing
+      display: block
+      background: $darkest
+      border-radius: $baseSpacing
+      color: $lightest
+      border: 5px solid $dark
+
+  .api-item, h4
+    font-family: monospace
+
+  .optional
+    color: #666
