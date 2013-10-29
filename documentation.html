@@ -590,7 +590,7 @@
             <p> Rules can be added to a system to specify its behavior. The <code><a href="#object-rules" data-parent="object-rules">Rules</a></code> object has some starter rules, but a complex system will probably have some custom rules.</p>
             <p>Rules are functions of the form:</p>
             <code class="example">function(particle, i, delta) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;...<br/>}</code>
-            <p>Where particle is a <code><a href="#class-particle" data-parent="class-particle">Particle</a></code>, <code>i</code> is the index of the particle in the system, and <code>delta</code> is the time in seconds since the last update.</p>
+            <p>Where <code>particle</code> is a <code><a href="#class-particle" data-parent="class-particle">Particle</a></code>, <code>i</code> is the index of the particle in the system, and <code>delta</code> is the time in seconds since the last update.</p>
             <span class="prop-heading">Functions:</span>
             <ul>
               <li>
@@ -621,7 +621,7 @@
               </li>
               <li>
                 <h3 class="api-item" id="function-rules-attract">Function attract(Number strength, [<a href="#class-vector" data-parent="class-vector">Vector</a> pos])<a class="anchor-link" href="#function-rules-attract"><span class="anchor"></span></a></h3>
-                <p> Attracts a particle to a point with the formula (1 / distance).</p>
+                <p> Attracts a particle to a point with the formula <code>1/distance</code>.</p>
                 <div><span class="param-heading">Params:</span>
                 <ul>
                   <li>
@@ -638,7 +638,7 @@
               </li>
               <li>
                 <h3 class="api-item" id="function-rules-magnet">Function magnet(Number strength, [<a href="#class-vector" data-parent="class-vector">Vector</a> pos])<a class="anchor-link" href="#function-rules-magnet"><span class="anchor"></span></a></h3>
-                <p> Attracts a particle to a point with the formule (1 / distance^2).</p>
+                <p> Attracts a particle to a point with the formula <code>1/distance^2</code>.</p>
                 <div><span class="param-heading">Params:</span>
                 <ul>
                   <li>
