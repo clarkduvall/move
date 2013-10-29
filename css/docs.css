@@ -1,0 +1,85 @@
+#toc {
+  font-size: 20px;
+  width: 200px;
+  position: absolute; }
+  #toc > ul:first-child {
+    margin-top: 0; }
+  #toc > ul > li > ul {
+    font-size: 16px; }
+  #toc > ul > li > a {
+    margin-top: 20px;
+    display: inline-block; }
+  #toc > ul > li:first-child > a {
+    margin-top: 0; }
+  #toc a {
+    font-weight: inherit; }
+  #toc > li > ul {
+    margin-bottom: 10px; }
+  #toc li {
+    list-style: none; }
+  #toc b {
+    font-size: 18px;
+    margin-left: -20px;
+    margin-top: 10px;
+    display: block; }
+
+a {
+  border-bottom: 1px black dotted;
+  font-weight: bold; }
+
+#docs {
+  margin-left: 200px;
+  padding-left: 20px;
+  border-left: 5px solid #1c4000; }
+  #docs .return-heading,
+  #docs .param-heading {
+    margin: 10px 0 0 0;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold; }
+  #docs .prop-heading {
+    margin: 10px 0 0 0;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold; }
+  #docs li:hover {
+    background: rgba(239, 0, 255, 0.1); }
+  #docs li {
+    padding-left: 40px;
+    margin-bottom: 30px; }
+  #docs h4, #docs h3 {
+    margin: 10px 0 10px -40px; }
+  #docs p {
+    margin: 10px 0 10px 0; }
+  #docs ul, #docs li {
+    list-style: none; }
+  #docs > div > div {
+    padding-left: 20px;
+    border-left: 5px solid #377f00; }
+    #docs > div > div > div > ul, #docs > div > div > ul {
+      padding-left: 20px;
+      border-left: 5px solid #53bf00; }
+      #docs > div > div > div > ul > li, #docs > div > div > ul > li {
+        border-bottom: 3px dotted #377f00; }
+      #docs > div > div > div > ul > li > div > ul, #docs > div > div > ul > li > div > ul {
+        padding-left: 20px;
+        border-left: 5px solid #63e500; }
+        #docs > div > div > div > ul > li > div > ul > li > div > ul, #docs > div > div > ul > li > div > ul > li > div > ul {
+          padding-left: 20px;
+          border-left: 5px solid #6eff00; }
+  #docs .inner > p:first-child {
+    margin-top: 0; }
+  #docs code {
+    color: #377f00; }
+    #docs code.example {
+      margin: 0 20px 0 20px;
+      padding: 20px;
+      display: block;
+      background: #1c4000;
+      border-radius: 10px;
+      color: #6eff00;
+      border: 5px solid #377f00; }
+  #docs .api-item, #docs h4 {
+    font-family: monospace; }
+  #docs .optional {
+    color: #666666; }
