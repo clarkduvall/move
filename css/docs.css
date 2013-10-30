@@ -1,3 +1,7 @@
+a {
+  border-bottom: 1px black dotted;
+  font-weight: bold; }
+
 #toc {
   font-size: 20px;
   width: 200px;
@@ -22,10 +26,6 @@
     margin-left: -20px;
     margin-top: 10px;
     display: block; }
-
-a {
-  border-bottom: 1px black dotted;
-  font-weight: bold; }
 
 #docs {
   margin-left: 200px;
@@ -85,3 +85,13 @@ a {
     font-family: monospace; }
   #docs .optional {
     color: #666666; }
+
+.heading {
+  position: relative; }
+  .heading h1 {
+    margin-bottom: 40px; }
+
+.docatron {
+  color: #444444;
+  position: absolute;
+  top: 40px; }
