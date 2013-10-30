@@ -1,3 +1,8 @@
+// Move.js
+// Simple particle simulator.
+//
+// By Clark DuVall
+
 (function() {
   var root = this,
       Move,
@@ -142,7 +147,7 @@
       draw: Controller.prototype.draw,
       preDraw: function(ctx) {},
       postDraw: function(ctx) {},
-      setContext: function(ctx) {},
+      setContext: function(ctx) {}
     });
 
     /// property Controller.systems {@System[]}
